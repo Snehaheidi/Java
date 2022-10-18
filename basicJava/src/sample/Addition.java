@@ -9,4 +9,7 @@ public interface Addition {
 //		System.out.println("Interface hava Default Method....");
 //	}
 	public int add_inter(int a , int b);
+	public static void Result() {
+		System.out.println("Static method -> Addition Interface");
+	}
 }

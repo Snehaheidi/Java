@@ -49,9 +49,11 @@ public class MainManagement extends Booking
                 break;
                 case 4: {
                 	PrintBookedDetails bd = new PrintBookedDetails();
-                	 System.out.println("Enter passenger Id :");
-                     int id = scanner.nextInt();
-                	 bd.view(id);
+//                	 System.out.println("Enter passenger Id :");
+//                     int id = scanner.nextInt();
+                	 System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-*-*-*-*-*-*");
+                	 bd.view();
+                	 System.out.println("---------------------------------------------------------------------------------------------------");
                 }
                 break;
                 case 5: {

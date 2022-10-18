@@ -137,15 +137,11 @@ public class CancelTicket extends Booking{
 		return availableberth;
 	}
 	private void swapBerthId(String seatNum, int index, String bP) {
-		//bookedTicket[topTicketCount-1].bP='U';
 		bookedTicket[index].berthPreference= bP;
-		// bookedTicket[topTicketCount-1].allotted=seatNum;
 		bookedTicket[index].allotted=seatNum;
 	}
 	private  void swapBerthIdWL(String seatNum, int index, String bP) {
-		//bookedTicket[topTicketCount-1].bP='U';
 		bookedRAC[index].berthPreference=bP;
-		// bookedTicket[topTicketCount-1].allotted=seatNum;
 		bookedRAC[index].allotted=seatNum;
 	}
 }

@@ -2,13 +2,13 @@ package railway;
 
 public class Booking {
 	//AVAILABLE TICKETS
-    static int availableLowerBerths = 1;
-    static int availableMiddleBerths = 1;
-    static int availableUpperBerths = 0;
-    static int availableRacTickets = 1;
-    static int availableWaitingList = 1;
+    static int availableLowerBerths = 2;
+    static int availableMiddleBerths = 2;
+    static int availableUpperBerths = 2;
+    static int availableRacTickets = 2;
+    static int availableWaitingList = 2;
 
-	static int avaiableTicketCount=3;   //---> Total Count
+	static int avaiableTicketCount=10;   //---> Total Count
 	static final int n = availableLowerBerths + availableMiddleBerths + availableUpperBerths ;
 	//object array
 	static Passenger bookedTicket[]=new Passenger[n];
