@@ -34,3 +34,7 @@ public class PalindromeOrNot {
 		return oparr;
 	}
 }
+/*
+MALAYalam
+Palindrome 
+ */
