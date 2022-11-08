@@ -16,14 +16,14 @@ public class RenameFileName {
 			e.printStackTrace();
 		}
 		//Rename Mehtod --> file name rename 
-		
-       File name = new File("C:\\Users\\Administrator\\Desktop\\Filedhandling\\Sample\\hello.txt");
-       if(file.renameTo(name)) {
-    	   System.out.println("File Name Successfully Renamed...");
-       }
-       else {
-    	   System.out.println("File Name not changed..");
-       }
+//		
+//       File name = new File("C:\\Users\\Administrator\\Desktop\\Filedhandling\\Sample\\hello.txt");
+//       if(file.renameTo(name)) {
+//    	   System.out.println("File Name Successfully Renamed...");
+//       }
+//       else {
+//    	   System.out.println("File Name not changed..");
+//       }
 	}
 
 }

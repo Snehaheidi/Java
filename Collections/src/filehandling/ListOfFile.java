@@ -13,7 +13,7 @@ public class ListOfFile {
        File[] fileList1 = f.listFiles(); 
        for(File i : fileList1) {
     	   if(i.isFile()) {     // files manttum print pannum
-    		   System.out.println(i);
+    		   System.out.println(i.getName());
     	   }
  
        }
@@ -21,7 +21,7 @@ public class ListOfFile {
        File[] fileList2 = f.listFiles(); 
        for(File i : fileList2) {
     	   if(i.isDirectory()) {     // files manttum print pannum  o/p --> C:\Users\Administrator\Desktop\Filedhandling
-    		   System.out.println(i);
+    		   System.out.println(i.getName());
     	   }
        }
        

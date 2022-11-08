@@ -19,8 +19,7 @@ public class Passenger
         allotted = "";
         serialNumber = serialNum++;
     }
-
-    public Passenger() {
-        super();
-    }
+	public Passenger() {
+		// TODO Auto-generated constructor stub
+	}
 }
