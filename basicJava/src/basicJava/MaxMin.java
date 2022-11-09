@@ -29,6 +29,13 @@ public class MaxMin {
 	   min = arr[0];
 	   System.out.println("Minimum Value = "+min+" Maximum Value = "+max);
    }
+//   public void display() {
+//	   System.out.println("Display method");
+//	   insert();
+//   }
+//   public void insert() {
+//	   System.out.println("Insert Method");
+//   }
 }
 //OUTPUT:
 /*
