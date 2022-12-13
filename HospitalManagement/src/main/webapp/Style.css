@@ -1,0 +1,27 @@
+@charset "ISO-8859-1";
+.division label
+{
+  color: black;
+  width: 150px;
+  display: inline-block;
+}
+body
+{
+	background-image:url("hospital1.jpg");
+	background-repeat : no-repeat;
+	background-size:cover;
+	height: 100px;
+	margin: 100px;
+	display: grid;
+	align-items: center;
+	justify-items: center;
+}
+button
+{
+ 	width:100%;
+    background-color:#1e90ff;
+    color: #fff;
+    border:none;
+    border-radius:5px;
+    letter-spacing:1px;
+}

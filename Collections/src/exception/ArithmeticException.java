@@ -17,5 +17,11 @@ public class ArithmeticException {
     		e.printStackTrace();  // LIFO --> line by line error handle 
     		System.out.println("/by zero");
     	}
+//    	catch(ArithmeticException e) {
+//    		parent class Exception decalre panitu child Exceptionclass next declare panna thorw error
+//    	}
+    	finally {
+    		System.out.println("always execute finally block");
+    	}
     }
 }

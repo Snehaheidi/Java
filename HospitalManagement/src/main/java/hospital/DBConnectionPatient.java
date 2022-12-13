@@ -25,7 +25,7 @@ public class DBConnectionPatient {
         	DB_URL +="HospitalManagement";
         	Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
         	Statement statement = connection.createStatement();
-        	String sql = "CREATE TABLE IF NOT EXISTS PATIENT_DETAILS(Patient_ID INTEGER(10) NOT NULL AUTO_INCREMENT,Patient_Name VARCHAR(50) NOT NULL,phNo VARCHAR(10) NOT NULL,In_Time VARCHAR(20) NOT NULL,PRIMARY KEY(Patient_ID))";
+        	String sql = "CREATE TABLE IF NOT EXISTS PATIENT_DETAILS(Patient_ID INTEGER(10) NOT NULL AUTO_INCREMENT,Patient_Name VARCHAR(50) NOT NULL,phNo VARCHAR(10) NOT NULL,In_Time VARCHAR(20),PRIMARY KEY(Patient_ID))";
         	statement.executeUpdate(sql);
         	System.out.println("Table Created Successfully..");
         }
@@ -42,5 +42,16 @@ public class DBConnectionPatient {
         }catch(SQLException e) {
         	e.printStackTrace();
         }
+       try {
+       	DB_URL +="HospitalManagement";
+       	Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
+       	Statement statement = connection.createStatement();
+       	String sql = "CREATE TABLE IF NOT EXISTS TIME_TABLE(TIME_ID INTEGER(10) NOT NULL PRIMARY KEY AUTO_INCREMENT,Patient_ID INTEGER NOT NULL,DOCTOR_TIME INTEGER ,OUT_TIME VARCHAR(10),WAITING_TIME INTEGER)";
+       	statement.executeUpdate(sql);
+       	System.out.println("Table Created Successfully..");
+       }
+       catch(SQLException e) {
+       	e.printStackTrace();
+       }
 	}
 }

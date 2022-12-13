@@ -1,0 +1,86 @@
+@charset "ISO-8859-1";
+
+body {
+	background-image: url("backgroundcollege.jpg");
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	height: 500px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+}
+h3{
+	overflow: hidden;
+	background-color : white;
+	float: center;
+	color: black;
+	text-align: center;
+	padding: 35px 26px;
+	text-decoration: none;
+	font-size: 17px;
+}
+.topnav {
+	overflow: hidden;
+	background-color: black;
+}
+
+.topnav a {
+	float: left;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+.topnav a.active {
+	background-color: #1a8ed6;
+	color: white;
+}
+
+.topnav a:hover, .dropdown:hover .dropbutton {
+  	background-color: #ddd;
+	color: black;
+}
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbutton {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}

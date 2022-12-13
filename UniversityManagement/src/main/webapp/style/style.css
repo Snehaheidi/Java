@@ -1,0 +1,47 @@
+@charset "ISO-8859-1";
+.viewdata h1{
+	text-align:center;
+	color : black;
+}
+.container h2{
+	color : black;
+}
+.container form label
+{
+  color: black;
+  width: 150px;
+  display: inline-block;
+}
+body
+{
+	background-image:url("backgroundcollege.jpg");
+	background-repeat : no-repeat;
+	background-size:cover;
+}
+.container{
+	width:50%;
+	margin-left:2%;
+	margin-right:3%;
+	margin-top:10%;
+	float:left;
+	text-align:center;
+}
+.innerContainer{
+	width:80%;
+	margin-left:20%;
+	margin-right:53%;
+	margin-top:2%;
+	float:left;
+	text-align:center;
+}
+
+button
+{
+ 	width:50%;
+    background-color:#1e90ff;
+    border:none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color:black;
+    border-radius:5px;
+    letter-spacing:1px;
+}

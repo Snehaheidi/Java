@@ -6,4 +6,5 @@
  *
  */
 module basicJava {
+	requires java.sql;
 }

@@ -9,7 +9,7 @@ public class StudentDetails{
 	public static void main(String[] args) {
         StudentDetail student = new StudentDetail();
         StudentDetail student1 = new StudentDetail("sneha",1001,21);
-        StudentDetail student2 = new StudentDetail("Thenmozhi",1002,23);
+        StudentDetail student2 = new StudentDetail("thenmozhi",1002,23);
         StudentDetail student3 = new StudentDetail("chitra",1003,16);
         StudentDetail student4 = new StudentDetail("varnika",1004,20);
         ArrayList<StudentDetail> s = new ArrayList<>();

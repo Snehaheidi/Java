@@ -20,9 +20,8 @@ public class LoginCreate
             Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
             Statement statement = connection.createStatement();
             String sql = "INSERT INTO user_bank_details(Holder_Name,Password,Balance) VALUES ('"+name+"','"+passcode+"',1000)";
-            if(statement.executeUpdate(sql)==1)
-            {
-                System.out.println("\n ....Account Create Successfully...!");
+            if(statement.executeUpdate(sql)==1) {
+                            System.out.println("\n ....Account Create Successfully...!");
             }
         }
         catch (SQLException e)

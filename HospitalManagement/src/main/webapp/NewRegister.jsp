@@ -5,10 +5,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>registerPatientDetails</title>
+<link rel="stylesheet" type="text/css" href="Style.css">
 </head>
 <body>
 <h1>New Patient Details Register</h1>
- <form action="LoginPage" method="post">
+<div class="division">
+ <form action="Register" method="post">
    <table>
    <tr>
    <td>Enter Patient Name : </td>
@@ -19,17 +21,18 @@
    <td><input type=text id=phNo name=phNo></td>
    </tr>
    <tr>
-   <td>Enter In-Time : </td>
-   <td><input type=text id=inTime name=inTime></td>
+   <td>Enter Blood Group : </td>
+   <td><input type=text id=inTime></td>
    </tr>
    <tr>
-   <td>Enter Doctor Time : </td>
-   <td><input type=text id=docTime name=docTime></td>
+   <td>Enter Your City    : </td>
+   <td><input type=text id=docTime></td>
    </tr>
-   </table>
-   <button id="submit"><b>SUBMIT</b></button>
-  </form> <br><br>
-  <a href="Login.jsp">Back</a><br><br>
-  <script src="RegisterJs.js"></script>
+   </table><br><br>
+   <button id="submit">SUBMIT</button>
+  </form>
+  </div><br><br>
+    <script src="RegisterJs.js"></script>
+  <a href="Login.jsp">Back</a>
 </body>
 </html>

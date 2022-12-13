@@ -1,14 +1,21 @@
 package hospital;
 
 public class Patient {
-     private int pId = 1;
-     String pName ,phNo , inTime ,outTime , waitTime, docTime;
+     private int pId;
+     String pName,phNo , inTime,outTime;
+     int waitTime,docTime;
      int timeTaken;
-	public Patient(String pName, String phNo, String inTime, String docTime) {
+	public Patient(String pName, String phNo) {
 		this.pName = pName;
 		this.phNo = phNo;
+	}
+
+	public Patient(int p_id, String inTime, int doctorTime, int waitingTime, String outtime) {
+		this.pId = p_id;
 		this.inTime = inTime;
-		this.docTime = docTime;
+		this.docTime = doctorTime;
+		this.waitTime = waitingTime;
+		this.outTime = outtime;
 	}
 	public int getpId() {
 		return pId;
@@ -40,17 +47,24 @@ public class Patient {
 	public void setOutTime(String outTime) {
 		this.outTime = outTime;
 	}
+	public int getDocTime() {
+		return docTime;
+	}
+
+	public void setDocTime(int docTime) {
+		this.docTime = docTime;
+	}
+
 	public int getTimeTaken() {
 		return timeTaken;
 	}
 	public void setTimeTaken(int timeTaken) {
 		this.timeTaken = timeTaken;
 	}
-	public String getWaitTime() {
+	public int getWaitTime() {
 		return waitTime;
 	}
-	public void setWaitTime(String waitTime) {
+	public void setWaitTime(int waitTime) {
 		this.waitTime = waitTime;
 	}
-     
 }
