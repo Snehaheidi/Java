@@ -24,9 +24,6 @@ public class StudentDetails{
             System.out.println("Name : "+i.getSname()+"\t\t Reg.No : "+i.getSId()+"\t\tAge: "+i.getSage());
         }
         ComparatorDemo cmd = new ComparatorDemo();
-        for(StudentDetail i:s){
-        	i.printDetails();
-        }
         Collections.sort(s,cmd);
         System.out.println("-------------------------------------------------------------------------------");
         for(StudentDetail i:s){

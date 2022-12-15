@@ -29,5 +29,6 @@ public class EmployeeMain {
 			System.out.println("Enter the Correct Option...");
             select();
 		}
+		scanner.close();
 	}
 }

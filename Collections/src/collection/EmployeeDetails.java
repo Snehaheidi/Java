@@ -27,7 +27,7 @@ public class EmployeeDetails extends EmployeeMain{
 		System.out.println("Employee Name \t\t Employee Age \t\t Employee ID");
 		for(Employee emp : empList) {
 			print(emp);
-			
+
 		}
 		System.out.println("-------------------------------------------------------");
 	}
@@ -38,14 +38,14 @@ public class EmployeeDetails extends EmployeeMain{
 		System.out.println("");
 	}
 	public void delete(ArrayList<Employee> empList) {
-		System.out.println("Enter the Index Removed : "+empList.size());
-		int index = scanner.nextInt();
-		if(index<empList.size()) {
-			empList.remove(index);
-			display(empList);
-		}
-		else {
-			System.out.println("Please enter the correct index position..");
-		}
+		System.out.println("Enter the Employee Id : ");
+		int id = scanner.nextInt();
+			for(Employee emp : empList) {     
+				if(id==emp.getEmpId()) {
+					empList.remove(emp);
+					display(empList);
+					break;
+				}
+			}
 	}
 }
