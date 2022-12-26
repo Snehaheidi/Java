@@ -1,9 +1,9 @@
 package exception;
 
-public class ArithmeticException {
+public class ArithException {
 
 	public static void main(String[] args) {
-		ArithmeticException a = new ArithmeticException();
+		ArithException a = new ArithException();
 		a.except();
 
 	}
@@ -18,7 +18,8 @@ public class ArithmeticException {
     		System.out.println("/by zero");
     	}
 //    	catch(ArithmeticException e) {
-//    		parent class Exception decalre panitu child Exceptionclass next declare panna thorw error
+//    	
+//    		//parent class Exception decalre panitu child Exceptionclass next declare panna thorw error
 //    	}
     	finally {
     		System.out.println("always execute finally block");

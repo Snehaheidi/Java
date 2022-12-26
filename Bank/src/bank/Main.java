@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 	static Scanner scanner = new Scanner(System.in);
+	static Login l = new Login();
 	public static void main(String[] args){
 		System.out.println("*-*-*-*-*-*- TQ ATM -*-*-*-*-*-*-");
 		Main.select();
@@ -49,7 +50,6 @@ public class Main {
 		}
 	}
 	private static void holder() {
-		Login l = new Login();
 		System.out.println("1).Login \n2).Back");
 		int choice = scanner.nextInt();
 		switch(choice){
@@ -72,28 +72,26 @@ public class Main {
 		}
 	}
 	private static void loginPage(int i) {
-		DepositWithDraw t = new DepositWithDraw();
-		Transfer trans = new Transfer();
 		System.out.println("\n1)WithDrawal \n2).CashDeposit \n3).Transfer \n4).History \n5).Back ");
 		int choice = scanner.nextInt(); 
 		switch(choice) {
 		case 1:
-			t.withDraw(i);
+		   l.withDraw(i);
 			System.out.println("\nWithDraw Success");
 			loginPage(i);
 			break;
 		case 2:
-			t.deposit(i);
+			l.deposit(i);
 			System.out.println("Deposit");
 			loginPage(i);
 			break;
 		case 3:		
-			trans.transfer(i);
+			l.transfer(i);
 			System.out.println("Transfer SuccessFul...");
 			loginPage(i);
 			break;
 		case 4:
-			trans.History(i);
+			l.History(i);
 			System.out.println("--------------------------");
 			loginPage(i);
 			break;

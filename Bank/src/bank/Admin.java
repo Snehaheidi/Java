@@ -2,11 +2,12 @@ package bank;
 
 import java.util.*;
 
-public class Admin extends Main{
+public class Admin {
 	long actNo;
 	static int cusID = 0;
 	private String cusName, pass , cusPass;
 	int transId = 0 , balance = 0 , transamount = 0;
+	static Scanner scanner = new Scanner(System.in);
 	static ArrayList<Customer> customer = new ArrayList<Customer>();
 	public void addNewCusInfo() {
 		System.out.println("Enter the Customer Name : ");
