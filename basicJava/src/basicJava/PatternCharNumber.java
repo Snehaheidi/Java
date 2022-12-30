@@ -25,5 +25,14 @@ public class PatternCharNumber {
 			k++;
 		}
 	}
-
 }
+/*
+i/p : 5
+o/p : 
+
+1
+b2
+3c3
+d4d4
+5e5e5
+*/
