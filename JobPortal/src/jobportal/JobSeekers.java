@@ -5,9 +5,9 @@ import java.util.*;
 public class JobSeekers implements ProfileView{
 	private String name,dob,collegeName,degree,companyName=null,role=null,mail;
 	private int exp;
-	private AdminPage a = new AdminPage();;
-	private Scanner scanner = new Scanner(System.in);
+	private AdminPage a = new AdminPage();
 	public void jobSeekers() {
+		Scanner scanner = new Scanner(System.in);
 		System.out.println("1)Login \t2)Register \t3)Exit");
 		int ch = scanner.nextInt();
 		switch(ch) {
@@ -28,12 +28,12 @@ public class JobSeekers implements ProfileView{
 			break;
 		default:
 			System.out.println("Enter the Correct Option.");
-			jobSeekers();
-				
+			jobSeekers();				
 		}
 	}
 	@Override
 	public void register() {
+		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter the Your Name : ");
 		scanner.nextLine();
 		name=scanner.nextLine();
@@ -63,6 +63,7 @@ public class JobSeekers implements ProfileView{
 			mail = scanner.nextLine();
 			Seekers j = new Seekers(name,mail);
 			if(a.loginSeeker(j)) {
+				System.out.println("Login Success...");
 				login(name,mail);
 			}			
 		}
@@ -73,6 +74,7 @@ public class JobSeekers implements ProfileView{
 	}
 	@Override
 	public void login(String name,String mail) {
+		Scanner scanner = new Scanner(System.in);
 		System.out.println(" 1)Search Job \t 2)ViewProfile \t3)FeedBack \t4)Logout");
 		int ch = scanner.nextInt();
 		switch(ch) {
@@ -96,41 +98,61 @@ public class JobSeekers implements ProfileView{
 		}
 	}
 	private void relatedJob(String mail) {
-		AdminPojo admin = a.realtedJob(mail);
-       if(admin!=null) {
-    	   System.out.println("--------Related Job----------");
-    	   System.out.println("Company Name : "+admin.getCom_name());
-    	   System.out.println("Role : "+admin.getRole());
-    	   System.out.println("Skils : "+admin.getSkils());
-    	   System.out.println("Experience : "+admin.getExperience());
-    	   System.out.println("No Of Vacancy : "+admin.getNo_of_vacancy());
-    	   System.out.println("Posted Date : "+admin.getDate());
+		Scanner scanner = new Scanner(System.in);
+		ArrayList<AdminPojo> a1 = a.realtedJob(mail);
+       if(!a1.isEmpty()) {
+    	   for(AdminPojo admin:a1) {
+    		   System.out.println("--------Related Job----------");
+    		   System.out.println("Company id : "+admin.getComId());
+        	   System.out.println("Company Name : "+admin.getCom_name());
+        	   System.out.println("Role : "+admin.getRole());
+        	   System.out.println("Skils : "+admin.getSkils());
+        	   System.out.println("Experience : "+admin.getExperience());
+        	   System.out.println("No Of Vacancy : "+admin.getNo_of_vacancy());
+        	   System.out.println("Posted Date : "+admin.getDate());
+    	   }	   
        }
-       System.out.println("1)Apply Job \t 2)Back");
-       int ch = scanner.nextInt();
-       switch(ch) {
-       case 1:
-    	   applyJob();
-    	   relatedJob(mail);
-       case 2:
-    	   login(name,mail);
-       default:
-    	   System.out.println("Enter Correct Option..");
-    	   relatedJob(mail);
-       }
-       
+       applyJob();
 	}
 	private void applyJob() {
-		
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("1)Apply Job \t 2)Back");
+	       int ch = scanner.nextInt();
+	       switch(ch) {
+	       case 1:
+	    	   apply();
+	    	   applyJob();
+	       case 2:
+	    	   login(name,mail);
+	       default:
+	    	   System.out.println("Enter Correct Option..");
+	    	   applyJob();
+	       }       
+	}
+	private void apply() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter the Company Id :");
+		int id = scanner.nextInt();
 	}
 	@Override
 	public void viewProfile(String mail) {
-		if(a.viewJobSeekerProfile(mail)) {
-			System.out.println("view profile");
+		AdminPojo a1 = a.viewJobSeekerProfile(mail);
+		if(a1!=null) {
+	       System.out.println("Name : "+a1.getSeeker_name());
+	       System.out.println("Date OF Birth : "+a1.getDob());
+	       System.out.println("College Name : "+a1.getCollege_name());
+	       System.out.println("Degree : "+a1.getDegree());
+	       System.out.println("Experience : "+a1.getExp());
+	       System.out.println("Company Name : "+a1.getCom_name());
+	       System.out.println("Role : "+a1.getRole());
+		}
+		else {
+			System.out.println("No record found..");
 		}
 	}
 	@Override
 	public void feedback() {
+		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter the Rating 1 to 5 ");
 		int rate = scanner.nextInt();
 		System.out.println("Enter the feedback : ");

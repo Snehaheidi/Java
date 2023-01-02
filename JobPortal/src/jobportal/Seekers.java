@@ -25,49 +25,25 @@ public class Seekers {
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public String getDob() {
 		return dob;
-	}
-	public void setDob(String dob) {
-		this.dob = dob;
 	}
 	public String getCollegeName() {
 		return collegeName;
 	}
-	public void setCollegeName(String collegeName) {
-		this.collegeName = collegeName;
-	}
 	public String getDegree() {
 		return degree;
-	}
-	public void setDegree(String degree) {
-		this.degree = degree;
 	}
 	public String getCompanyName() {
 		return companyName;
 	}
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
 	public String getRole() {
 		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
 	}
 	public String getMail() {
 		return mail;
 	}
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
 	public int getExp() {
 		return exp;
-	}
-	public void setExp(int exp) {
-		this.exp = exp;
 	}
 }

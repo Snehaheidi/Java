@@ -11,13 +11,13 @@ import java.util.ArrayList;
 public class DaoOperation {
 	private final String USER="root",PASS= "root";
 	private final String DB_URL="jdbc:mysql://localhost/JobPortal";
-
 	private Connection connection = null;
 	private PreparedStatement preparestatement = null;
 	private Statement statement = null;
 	private ResultSet resultSet= null;
     private ArrayList<AdminPojo> seeker = new ArrayList<AdminPojo>();
     private ArrayList<AdminPojo> company =new ArrayList<AdminPojo>(); 
+    private ArrayList<AdminPojo> relatedJob = new ArrayList<AdminPojo>();
 	public boolean loginSeeker(Seekers j){
 		try {
 			connection = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -38,7 +38,6 @@ public class DaoOperation {
 		}
 		return false;
 	}
-
 	public boolean addPermissionJobSeekers(Seekers seeker) {
 		try {
 			connection = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -73,7 +72,6 @@ public class DaoOperation {
 		}
 		return false;
 	}
-
 	public boolean addPermissionCompany(CompanyPojo c) {
 		try {
 			connection = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -136,37 +134,7 @@ public class DaoOperation {
 		return false;
 	}
 
-	public boolean viewProfileJobSeeker(String mail) {
-		try {
-			connection = DriverManager.getConnection(DB_URL,USER,PASS);
-			String sql = "SELECT * FROM JOBSEEKERS WHERE MAIL_ID = ?";
-			preparestatement = connection.prepareStatement(sql);
-			preparestatement.setString(1, mail);
-			resultSet = preparestatement.executeQuery();
-			if(resultSet.next()) {
-				System.out.println("mail id : "+resultSet.getString("MAIL_ID"));
-				return true;
-			}		
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-		finally {
-			try {
-				connection.close();
-				connection = null;
-				preparestatement.close();
-				preparestatement = null;
-			} 
-			catch (SQLException e) {
-				e.printStackTrace();
-			}	
-		}
-		return false;
-	}
-
-	public AdminPojo realtedJob(String mail) {
+	public AdminPojo viewProfileJobSeeker(String mail) {
 		AdminPojo a = null;
 		try {
 			connection = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -175,62 +143,17 @@ public class DaoOperation {
 			preparestatement.setString(1, mail);
 			resultSet = preparestatement.executeQuery();
 			if(resultSet.next()) {
-				//System.out.println("mail id : "+resultSet.getString("MAIL_ID"));
-				int exp = resultSet.getInt("EXPERIENCE");
-				if(exp<1) {
-					String degree = resultSet.getString("DEGREE");
-					if(degree.equals("BCA") || degree.equals("CSE") || degree.equals("BSC IT") || degree.equals("MCA") || degree.equals("BSC CS")){ 
-						try {
-							connection = DriverManager.getConnection(DB_URL,USER,PASS);
-							String sql1 ="SELECT * FROM JOB_POST";
-							statement = connection.createStatement();
-							resultSet = statement.executeQuery(sql1);
-							if(resultSet.next()) {
-								String role = resultSet.getString("JOB_ROLE");
-								if(role.equals("software developer")){
-									String com_name = resultSet.getString("COMPANY_NAME");
-									String jobRole = resultSet.getString("JOB_ROLE");
-									String date = resultSet.getString("DATE_OF");
-									String skils = resultSet.getString("SKILS");
-									String exper = resultSet.getString("EXPERIENCE");
-									String no_of_vac = resultSet.getString("NO_OF_VAC");
-									a = new AdminPojo(com_name,jobRole,date,skils,exper,no_of_vac);
-									return a;
-								}		
-							}
-						}
-						catch(SQLException e) {
-							e.printStackTrace();
-							return a;
-						}
-					}
-					return a;
-				}
-				else {
-					try {
-						connection = DriverManager.getConnection(DB_URL,USER,PASS);
-						String sql1 ="SELECT * FROM JOB_POST";
-						statement = connection.createStatement();
-						resultSet = statement.executeQuery(sql1);
-						if(resultSet.next()) {
-							String role = resultSet.getString("JOB_ROLE");
-							if(role.equals("software developer")){
-								String com_name = resultSet.getString("COMPANY_NAME");
-								String jobRole = resultSet.getString("JOB_ROLE");
-								String date = resultSet.getString("DATE_OF");
-								String skils = resultSet.getString("SKILS");
-								String exper = resultSet.getString("EXPERIENCE");
-								String no_of_vac = resultSet.getString("NO_OF_VAC");
-								a = new AdminPojo(com_name,jobRole,date,skils,exper,no_of_vac);
-								return a;
-							}		
-						}
-					}
-					catch(SQLException e) {
-						e.printStackTrace();
-						return a;
-					}	
-				}
+				int id = resultSet.getInt("JobSeeker_Id");
+				String seeker_name = resultSet.getString("NAME");
+				String mail1 = resultSet.getString("MAIL_ID");
+				String dob = resultSet.getString("DOB");
+				String college_name = resultSet.getString("COLLEGE_NAME");
+				String degree = resultSet.getString("DEGREE");
+				String exp = resultSet.getString("EXPERIENCE");
+				String com_name = resultSet.getString("COMPANY_NAME");
+				String role = resultSet.getString("ROLE");
+				a = new AdminPojo(id,seeker_name,mail1,dob,college_name,degree,exp,com_name,role);
+				return a;
 			}		
 		}
 		catch(SQLException e) {
@@ -249,6 +172,93 @@ public class DaoOperation {
 			}	
 		}
 		return a;
+	}
+
+	public ArrayList<AdminPojo> realtedJob(String mail) {
+		AdminPojo a = null;
+		try {
+			connection = DriverManager.getConnection(DB_URL,USER,PASS);
+			String sql = "SELECT * FROM JOBSEEKERS WHERE MAIL_ID = ?";
+			preparestatement = connection.prepareStatement(sql);
+			preparestatement.setString(1, mail);
+			resultSet = preparestatement.executeQuery();
+			if(resultSet.next()) {
+				//System.out.println("mail id : "+resultSet.getString("MAIL_ID"));
+				int exp = resultSet.getInt("EXPERIENCE");
+				if(exp<1) {
+					String degree = resultSet.getString("DEGREE");
+					if(degree.equals("BCA") || degree.equals("CSE") || degree.equals("BSC IT") || degree.equals("MCA") || degree.equals("BSC CS")){ 
+						try {
+							connection = DriverManager.getConnection(DB_URL,USER,PASS);
+							String sql1 ="SELECT * FROM JOB_POST";
+							statement = connection.createStatement();
+							resultSet = statement.executeQuery(sql1);
+							while(resultSet.next()) {
+								String role = resultSet.getString("JOB_ROLE");
+								if(role.equals("software developer")){
+									String com_name = resultSet.getString("COMPANY_NAME");
+									String jobRole = resultSet.getString("JOB_ROLE");
+									String date = resultSet.getString("DATE_OF");
+									String skils = resultSet.getString("SKILS");
+									String exper = resultSet.getString("EXPERIENCE");
+									String no_of_vac = resultSet.getString("NO_OF_VAC");
+									a = new AdminPojo(com_name,jobRole,date,skils,exper,no_of_vac);
+									relatedJob.add(a);
+								}		
+							}
+							return relatedJob;
+						}
+						catch(SQLException e) {
+							e.printStackTrace();
+							return relatedJob;
+						}
+					}
+					return relatedJob;
+				}
+				else {
+					try {
+						connection = DriverManager.getConnection(DB_URL,USER,PASS);
+						String sql1 ="SELECT * FROM JOB_POST";
+						statement = connection.createStatement();
+						resultSet = statement.executeQuery(sql1);
+						while(resultSet.next()) {
+							String role = resultSet.getString("JOB_ROLE");
+							if(role.equals("software developer")){
+								String com_name = resultSet.getString("COMPANY_NAME");
+								String jobRole = resultSet.getString("JOB_ROLE");
+								String date = resultSet.getString("DATE_OF");
+								String skils = resultSet.getString("SKILS");
+								String exper = resultSet.getString("EXPERIENCE");
+								String no_of_vac = resultSet.getString("NO_OF_VAC");
+								a = new AdminPojo(com_name,jobRole,date,skils,exper,no_of_vac);
+								relatedJob.add(a);
+							}		
+						}
+						return relatedJob;
+					}
+					catch(SQLException e) {
+						e.printStackTrace();
+						return relatedJob;
+					}	
+				}
+			}		
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return relatedJob;
+		}
+		finally {
+			try {
+				connection.close();
+				connection = null;
+				preparestatement.close();
+				preparestatement = null;
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}	
+		}
+		return relatedJob;
 	}
 
 	public boolean addpostJob(CompanyPojo com) {
@@ -318,7 +328,6 @@ public class DaoOperation {
 			}	
 		}
 	}
-
 	public ArrayList<AdminPojo> viewAllSeekers() {
 		AdminPojo a = null;
 		try {

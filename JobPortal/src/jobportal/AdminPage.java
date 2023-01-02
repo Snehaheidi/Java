@@ -4,7 +4,6 @@ import java.util.*;
 
 public class AdminPage {
 	private String admin_name="",admin_pass="";
-	Scanner scanner = new Scanner(System.in);
 	private DaoOperation d = new DaoOperation();
 	public AdminPage() {
 
@@ -15,13 +14,13 @@ public class AdminPage {
 	}
 
 	public void admin() {
+		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter the Name : ");
 		admin_name= scanner.nextLine();
 		System.out.println("Enter the password");
 		admin_pass = scanner.nextLine();
 		if(!admin_name.equals(" ") || !admin_pass.equals(" ")) {
-			AdminPage admin = new AdminPage(admin_name,admin_pass);
-			if(admin.adminLogin()) {
+			if(admin_name.equals("admin") && admin_pass.equals("admin")) {
 				option();
 			}
 		}
@@ -29,15 +28,9 @@ public class AdminPage {
 			System.out.println("please Enter the Id & password");
 			admin();
 		}
-
-	}
-	public boolean adminLogin() {
-		if(admin_name.equals("admin") && admin_pass.equals("admin")) {
-			return true;
-		}
-		return false;
 	}
 	private void option() {
+		Scanner scanner = new Scanner(System.in);
 		System.out.println("1)Company \t 2)JobSeekers \t 3)Logout");
 		int ch = scanner.nextInt();
 		switch(ch) {
@@ -57,6 +50,7 @@ public class AdminPage {
 		}
 	}
 	private void seekers() {
+		Scanner scanner = new Scanner(System.in);
 		System.out.println("1)View ALLJobSeekers \t 2)Back");
 		int c = scanner.nextInt();
 		switch(c) {
@@ -85,6 +79,7 @@ public class AdminPage {
 				System.out.println("Experience : "+a.getExp());
 				System.out.println("Company Name : "+a.getCom_name());
 				System.out.println("Role : "+a.getRole());
+				System.out.println("---------------------------------------"); 
 			}			
 		}
 		else {
@@ -94,7 +89,7 @@ public class AdminPage {
 	}
 	public boolean addPermissionJobSeekers(Seekers seeker) {	
 		if(d.addPermissionJobSeekers(seeker)) {
-			System.out.println("\n ....JobSeeker Account Create Successfully...!");
+			System.out.println("\n ...JobSeeker Account Create Successfully...!");
 			return true;
 		}
 		else{
@@ -108,20 +103,22 @@ public class AdminPage {
 		}
 		return false;
 	}
-	public boolean viewJobSeekerProfile(String mail) {
-		if(d.viewProfileJobSeeker(mail)) {
-			return true;
-		}
-		return false;
-	}
-	public AdminPojo realtedJob(String mail) {
-		AdminPojo a = d.realtedJob(mail);
+	public AdminPojo viewJobSeekerProfile(String mail) {
+		AdminPojo a = d.viewProfileJobSeeker(mail);
 		if(a!=null) {
 			return a;
 		}
 		return a;
 	}
+	public ArrayList<AdminPojo> realtedJob(String mail) {
+		ArrayList<AdminPojo> a = d.realtedJob(mail);
+		if(!a.isEmpty()) {
+			return a;
+		}
+		return a;
+	}
 	private void company() {
+		Scanner scanner = new Scanner(System.in);
 		System.out.println("1)View All CompanyJobPortal \t 2)Back");
 		int c = scanner.nextInt();
 		switch(c) {
@@ -142,6 +139,7 @@ public class AdminPage {
 				System.out.println("Company Name : "+a.getCom_name());
 				System.out.println("Company Mail_id : "+a.getMail_id());
 				System.out.println("Place : "+a.getPlace());
+				System.out.println("---------------------------------");
 			}	   
 		}
 		else {

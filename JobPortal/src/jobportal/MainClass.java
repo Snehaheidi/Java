@@ -28,6 +28,9 @@ public class MainClass {
 			break;
 		case 4:
 			System.exit(0);
+		default:
+			System.out.println("Enter the correct Option...");
+			start();
 		}
 		scanner.close();
 	}	

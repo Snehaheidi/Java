@@ -1,8 +1,10 @@
 package jobportal;
 
 public class CompanyPojo {
+	
 	private String mail_id=null,com_name=null,place=null,pass = null;
 	private String date=null,skils=null,experience=null,no_of_vacancy=null,role=null;
+	
 	public CompanyPojo(String mail_id,String com_name,String place,String pass) {
 		this.mail_id = mail_id;
 		this.com_name = com_name;
