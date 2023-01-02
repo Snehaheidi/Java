@@ -366,4 +366,38 @@ public class DaoOperation {
 			}	
 		}
 	}
+	public AdminPojo viewProfileCompany(String mail_id) {
+		AdminPojo a = null;
+		try {
+			connection = DriverManager.getConnection(DB_URL,USER,PASS);
+			String sql = "SELECT * FROM JOBSEEKERS WHERE MAIL_ID = ?";
+			preparestatement = connection.prepareStatement(sql);
+			preparestatement.setString(1, mail_id);
+			resultSet = preparestatement.executeQuery();
+			if(resultSet.next()) {
+				int id = resultSet.getInt("COMPANY_ID");
+				String com_name = resultSet.getString("COMPANY_NAME");
+				String mail = resultSet.getString("MAIL_ID");
+				String place = resultSet.getString("PLACE");
+				a = new AdminPojo(id,com_name,mail,place);
+				return a;
+			}		
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return a;
+		}
+		finally {
+			try {
+				connection.close();
+				connection = null;
+				preparestatement.close();
+				preparestatement = null;
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}	
+		}
+		return a;
+	}
 }

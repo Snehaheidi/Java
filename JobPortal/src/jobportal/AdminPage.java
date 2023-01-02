@@ -168,4 +168,11 @@ public class AdminPage {
 		}
 		return false;
 	}
+	public AdminPojo viewCompanyProfile(String mail_id) {
+		AdminPojo a = d.viewProfileCompany(mail_id);
+		if(a!=null) {
+			return a;
+		}
+		return a;
+	}
 }

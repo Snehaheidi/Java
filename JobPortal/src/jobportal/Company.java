@@ -119,7 +119,16 @@ public class Company implements ProfileView{
 	}
 	@Override
 	public void viewProfile(String mail_id) {		
-
+		AdminPojo a1 = a.viewCompanyProfile(mail_id);
+		if(a1!=null) {
+	      System.out.println("Company Id : "+a1.getCom_id());
+	      System.out.println("Company Name : "+a1.getCollege_name());
+	      System.out.println("Mail-id : "+a1.getMail_id());
+	      System.out.println("Place : "+a1.getPlace());
+		}
+		else {
+			System.out.println("No record found..");
+		}
 	}
 	@Override
 	public void feedback() {
