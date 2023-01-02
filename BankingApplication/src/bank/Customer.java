@@ -47,8 +47,7 @@ public class Customer
 		try
 		{
 			Connection connection = DriverManager.getConnection(DB_URL,USER,PASS);
-			if(name=="" || passcode == 0)
-			{
+			if(name=="" || passcode == 0){
 				System.out.println("Your Name or Password INCORRECT.. :-(");
 				return false;
 			}
