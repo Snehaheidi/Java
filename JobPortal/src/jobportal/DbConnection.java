@@ -14,7 +14,34 @@ public class DbConnection {
 		//		db.createDataBase();
 		//   	db.createTableJobSeeker();
 		//   	db.createTableCompany();
-		//db.jobPost();
+		//      db.jobPost();
+	    //		db.createApplyJob();
+	}
+
+	private void createApplyJob() {
+		try {
+			DB_URL += "JobPortal";
+			con = DriverManager.getConnection(DB_URL,USER,PASS);
+			st = con.createStatement();
+			String sql = "CREATE TABLE IF NOT EXISTS APPLY_JOBLISTS(Apply_Id INTEGER(10) AUTO_INCREMENT NOT NULL,Company_Mail VARCHAR(60)NOT NULL,Job_id INTEGER(20)NOT NULL,Job_seeker_id INTEGER(20)NOT NULL,PRIMARY KEY(Apply_Id),FOREIGN KEY(Company_Mail) REFERENCES Job_Post(MAIL_ID),FOREIGN KEY(Job_id) REFERENCES Job_post(Job_Id),FOREIGN KEY(Job_Seeker_id) REFERENCES JobSeekers(JobSeeker_Id))";
+			st.executeUpdate(sql);
+			System.out.println("table create successfully..");
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				con.close();
+				con = null;
+				st.close();
+				st = null;
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}	   
+		}
+		
 	}
 
 	private void createDataBase() {

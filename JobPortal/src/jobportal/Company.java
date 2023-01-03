@@ -66,7 +66,7 @@ public class Company implements ProfileView{
 	@Override
 	public void login(String mail_id,String pass) {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("1)ViewProfile  \t2)Post Job \t3)Feedback \t4).LogOut");
+		System.out.println("1)ViewProfile  \t2)Post Job \t3)Feedback \t4)Applied Job \t5)LogOut");
 		int ch = scanner.nextInt();
 		switch(ch) {
 		case 1:
@@ -81,12 +81,40 @@ public class Company implements ProfileView{
 			login(mail_id,pass);
 			break;
 		case 4:
+			appliedJobView();
+			login(mail_id,pass);
+		case 5:
 			System.out.println("logout success");
 			companyJobPortal();
 		default:
 			System.out.println("Enter Correct Option..");
 			login(mail_id,pass);
 		}
+	}
+	private void appliedJobView() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter the mail-id : ");
+		mail_id = scanner.nextLine();
+		System.out.println("Enter the Password : ");
+		pass = scanner.nextLine();
+		CompanyPojo c = new CompanyPojo(mail_id,pass);
+		ArrayList<AdminPojo> list = a.appliedJobView(c);
+		if(!list.isEmpty()) {
+			for(AdminPojo a : list) {
+				System.out.println("");
+				System.out.println("Job Seeker Name : "+a.getSeeker_name());
+				System.out.println("Mail id : "+a.getMail_id());
+				System.out.println("Degree : "+a.getDegree());
+				System.out.println("Experience : "+a.getExp());
+				System.out.println("Applied Role : "+a.getRole());
+				System.out.println("Wanted Skils : "+a.getSkils());
+				System.out.println("----------------------------------------");
+			}
+		}
+		else {
+			System.out.println("No One Applied thier job..");
+		}
+		list.clear();
 	}
 	@Override
 	public void register() {

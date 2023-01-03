@@ -12,7 +12,6 @@ public class AdminPage {
 		this.admin_name = admin_id;
 		this.admin_pass = pass;
 	}
-
 	public void admin() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter the Name : ");
@@ -72,7 +71,7 @@ public class AdminPage {
 			for(AdminPojo a : seekers) {
 				System.out.println("JobSeeker id  : "+a.getSeeker_id());
 				System.out.println("Jobseeker Name : "+a.getSeeker_name());
-				System.out.println("Mail_id : "+a.getMail());
+				System.out.println("Mail_id : "+a.getMail_id());
 				System.out.println("Date of Birth : "+a.getDob());
 				System.out.println("Collge Name : "+a.getCollege_name());
 				System.out.println("Degree : "+a.getDegree());
@@ -124,7 +123,7 @@ public class AdminPage {
 		switch(c) {
 		case 1:	  
 			viewAllCompany();
-			seekers();
+			company();
 			break;
 		case 2:
 			option();
@@ -156,7 +155,7 @@ public class AdminPage {
 	}
 	public boolean companyLogin(CompanyPojo c) {
 		if(d.loginCompany(c)) {
-			System.out.println("Login Successfully..");
+			System.out.println("..Login Successfully..");
 			return true;
 		}
 		return false;
@@ -174,5 +173,18 @@ public class AdminPage {
 			return a;
 		}
 		return a;
+	}
+	public boolean applyJob(Seekers j) {
+		if(d.applyJob(j)) {
+			return true;
+		}
+		return false;
+	}
+	public ArrayList<AdminPojo> appliedJobView(CompanyPojo c) {
+		ArrayList<AdminPojo> appliedlist =  d.viewAppliedList(c);
+		if(!appliedlist.isEmpty()) {
+			return appliedlist;
+		}
+		return appliedlist;
 	}
 }

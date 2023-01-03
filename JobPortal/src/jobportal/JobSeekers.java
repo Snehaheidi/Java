@@ -17,7 +17,15 @@ public class JobSeekers implements ProfileView{
 			name = scanner.nextLine();
 			System.out.println("Enter the Mail-Id : ");
 			mail = scanner.nextLine();
-			login(name,mail);
+			Seekers j = new Seekers(name,mail);
+			if(a.loginSeeker(j)) {
+				System.out.println("Login Success...");
+				login(name,mail);
+			}	
+			else {
+				System.out.println("login again...");
+				jobSeekers();
+			}
 			break;
 		case 2:
 			register();
@@ -35,7 +43,6 @@ public class JobSeekers implements ProfileView{
 	public void register() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter the Your Name : ");
-		scanner.nextLine();
 		name=scanner.nextLine();
 		System.out.println("Enter the Mail-Id : ");
 		mail = scanner.nextLine();
@@ -48,7 +55,8 @@ public class JobSeekers implements ProfileView{
 		System.out.println("Enter Work Experience : ");
 		exp = scanner.nextInt();
 		if(exp>0) {
-			System.out.println("Enter the Company Name");
+			System.out.println("Enter the Company Name : ");
+			scanner.next();
 			companyName = scanner.nextLine();
 			System.out.println("Enter the Role : ");
 			role = scanner.nextLine();
@@ -103,8 +111,9 @@ public class JobSeekers implements ProfileView{
        if(!a1.isEmpty()) {
     	   for(AdminPojo admin:a1) {
     		   System.out.println("--------Related Job----------");
-    		   System.out.println("Company id : "+admin.getComId());
+    		   System.out.println("Job-Id : "+admin.getJob_id());
         	   System.out.println("Company Name : "+admin.getCom_name());
+        	   System.out.println("Contact Mail id : "+admin.getMail_id());
         	   System.out.println("Role : "+admin.getRole());
         	   System.out.println("Skils : "+admin.getSkils());
         	   System.out.println("Experience : "+admin.getExperience());
@@ -112,6 +121,7 @@ public class JobSeekers implements ProfileView{
         	   System.out.println("Posted Date : "+admin.getDate());
     	   }	   
        }
+       a1.clear();
        applyJob();
 	}
 	private void applyJob() {
@@ -131,8 +141,19 @@ public class JobSeekers implements ProfileView{
 	}
 	private void apply() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Enter the Company Id :");
-		int id = scanner.nextInt();
+		System.out.println("Enter the Company Mail-Id :");
+		String mailid = scanner.nextLine();
+		System.out.println("Enter the mail-id");
+		String mail = scanner.nextLine();
+		System.out.println("Enter the Job-Id : ");
+		int job_id = scanner.nextInt();
+		Seekers j = new Seekers(mailid,job_id,mail);
+		if(a.applyJob(j)) {
+			System.out.println("Apply Job..");
+		}
+		else {
+			System.out.println("can't apply");
+		}
 	}
 	@Override
 	public void viewProfile(String mail) {
