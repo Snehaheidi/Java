@@ -1,4 +1,4 @@
-package jobportal;
+package controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import model.AdminPojo;
+import model.CompanyPojo;
+import model.SeekersPojo;
 
 public class DaoOperation {
 	private final String USER="root",PASS= "root";
@@ -19,7 +23,7 @@ public class DaoOperation {
 	private ArrayList<AdminPojo> company =new ArrayList<AdminPojo>(); 
 	private ArrayList<AdminPojo> relatedJob = new ArrayList<AdminPojo>();
 	private ArrayList<AdminPojo> applylist = new ArrayList<AdminPojo>();
-	public int loginSeeker(Seekers j){
+	public int loginSeeker(SeekersPojo j){
 		int id = 0;
 		try {
 			connection = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -41,7 +45,7 @@ public class DaoOperation {
 		}
 		return id;
 	}
-	public boolean addPermissionJobSeekers(Seekers seeker) {
+	public boolean addPermissionJobSeekers(SeekersPojo seeker) {
 		try {
 			connection = DriverManager.getConnection(DB_URL,USER,PASS);
 			String sql = "INSERT INTO JOBSEEKERS (NAME,MAIL_ID,DOB,COLLEGE_NAME,DEGREE,EXPERIENCE,COMPANY_NAME,ROLE) VALUES (?,?,?,?,?,?,?,?)";
@@ -407,7 +411,7 @@ public class DaoOperation {
 		}
 		return a;
 	}
-	public boolean applyJob(Seekers j) {
+	public boolean applyJob(SeekersPojo j) {
 		try {
 			connection = DriverManager.getConnection(DB_URL,USER,PASS);
 			String sql1 = "INSERT INTO APPLY_JOBS(Job_id,Job_seeker_id) VALUES (?,?)";
@@ -424,36 +428,39 @@ public class DaoOperation {
 		}
 	return false;
 }
-public ArrayList<AdminPojo> viewAppliedList(CompanyPojo c) {
+    public ArrayList<AdminPojo> viewAppliedList(CompanyPojo c) {
 	String name=null,mail_id=null,degree=null,exp=null,role=null,skils=null;
 	AdminPojo a = null;
 	try {
 		connection = DriverManager.getConnection(DB_URL,USER,PASS);
-		String sql = "SELECT * FROM JOB_POST WHERE Company_Mail = ?";
+		String sql = "SELECT * FROM JOB_POST WHERE Mail_Id = ?";
 		preparestatement = connection.prepareStatement(sql);
+		//System.out.println(""+c.getMail_id());
 		preparestatement.setString(1, c.getMail_id());
 		resultSet = preparestatement.executeQuery();
 		if(resultSet.next()) {
-			int job_id = resultSet.getInt("Job_id");
-			//System.out.println("seekerid : "+seeker_id);
+			String com_name = resultSet.getString("COMPANY_NAME");
 			try {
-				String sql1 = "SELECT * FROM APPLY_JOBS WHERE Job_Id = ?";
+				String sql1 = "SELECT a.apply_id,j.JOB_ROLE,j.SKILS,s.MAIL_ID,s.DEGREE,s.EXPERIENCE,s.NAME FROM apply_jobs a left join job_post j ON a.Job_id=j.Job_Id  LEFT JOIN jobseekers s ON a.Job_seeker_id=s.JobSeeker_Id WHERE j.COMPANY_NAME=?";
 				preparestatement = connection.prepareStatement(sql1);
-				preparestatement.setInt(1, job_id);
+				preparestatement.setString(1, com_name);
 				resultSet = preparestatement.executeQuery();
 				while(resultSet.next()) {
 					name = resultSet.getString("NAME");
 					mail_id = resultSet.getString("MAIL_ID");
 					degree = resultSet.getString("DEGREE");
 					exp = resultSet.getString("EXPERIENCE");
+					role = resultSet.getString("JOB_ROLE");
+					skils = resultSet.getString("SKILS");
+					a = new AdminPojo(name,mail_id,degree,exp,role,skils); 
+					applylist.add(a);
 				}
 			}
 			catch(SQLException e) {
 				e.printStackTrace();
 				return null;
 			}
-			a = new AdminPojo(name,mail_id,degree,exp,role,skils); 
-			applylist.add(a);
+			return applylist;
 		}
 		return applylist;
 	}

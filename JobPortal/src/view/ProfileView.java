@@ -1,4 +1,4 @@
-package jobportal;
+package view;
 
 public interface ProfileView {
 	public abstract void login(String mail,String name);

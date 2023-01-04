@@ -1,4 +1,4 @@
-package jobportal;
+package model;
 
 public class CompanyPojo {
 	

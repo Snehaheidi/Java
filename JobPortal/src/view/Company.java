@@ -1,6 +1,10 @@
-package jobportal;
+package view;
 
 import java.util.*;
+
+import controller.AdminPage;
+import model.AdminPojo;
+import model.CompanyPojo;
 
 public class Company implements ProfileView{
 	private String mail_id,com_name,place,pass,role,date,experience,skils,no_of_vacancy;
@@ -96,11 +100,6 @@ public class Company implements ProfileView{
 		}
 	}
 	private void appliedJobView() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Enter the mail-id : ");
-		mail_id = scanner.nextLine();
-		System.out.println("Enter the Password : ");
-		pass = scanner.nextLine();
 		CompanyPojo c = new CompanyPojo(mail_id,pass);
 		ArrayList<AdminPojo> list = a.appliedJobView(c);
 		if(!list.isEmpty()) {
@@ -119,7 +118,7 @@ public class Company implements ProfileView{
 			System.out.println("No One Applied thier job..");
 		}
 		list.clear();
-		sendResponse();
+		//sendResponse();
 	}
 	private void sendResponse() {
 		Scanner scanner = new Scanner(System.in);

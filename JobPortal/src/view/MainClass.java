@@ -1,7 +1,8 @@
-package jobportal;
+package view;
 
 import java.util.Scanner;
 
+import controller.AdminPage;
 //main class
 public class MainClass {
 	public static void main(String[] args) {

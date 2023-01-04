@@ -1,6 +1,10 @@
-package jobportal;
+package view;
 
 import java.util.*;
+
+import controller.AdminPage;
+import model.AdminPojo;
+import model.SeekersPojo;
 
 public class JobSeekers implements ProfileView{
 	private String name,dob,collegeName,degree,companyName=null,role=null,mail;
@@ -53,7 +57,7 @@ public class JobSeekers implements ProfileView{
 			System.out.println("Enter the Role : ");
 			role = scanner.nextLine();
 		}
-		Seekers seeker = new Seekers(name,mail,dob,collegeName,degree,exp,companyName,role);	
+		SeekersPojo seeker = new SeekersPojo(name,mail,dob,collegeName,degree,exp,companyName,role);	
 		if(a.addPermissionJobSeekers(seeker)) {
 			System.out.println("Now Login....");
 			System.out.println("Enter the Name : ");
@@ -70,7 +74,7 @@ public class JobSeekers implements ProfileView{
 	}
 	@Override
 	public void login(String name,String mail) {
-		Seekers j = new Seekers(name,mail);
+		SeekersPojo j = new SeekersPojo(name,mail);
 		int i = a.loginSeeker(j);
 		if(i!=0) {
 			System.out.println("Login Success...");
@@ -153,7 +157,7 @@ public class JobSeekers implements ProfileView{
 		int seeker_id= scanner.nextInt();
 		System.out.println("Enter the Job-Id : ");
 		int job_id = scanner.nextInt();
-		Seekers j = new Seekers(seeker_id,job_id);
+		SeekersPojo j = new SeekersPojo(seeker_id,job_id);
 		if(a.applyJob(j)) {
 			System.out.println("Apply Job..");
 		}

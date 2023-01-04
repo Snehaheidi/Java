@@ -1,4 +1,4 @@
-package jobportal;
+package controller;
 
 import java.sql.*;
 

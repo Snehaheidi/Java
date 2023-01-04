@@ -1,4 +1,4 @@
-package jobportal;
+package model;
 
 public class AdminPojo {
 	private String com_name,mail_id,role,date,skils,experience,no_of_vacancy,place;

@@ -1,6 +1,11 @@
-package jobportal;
+package controller;
 
 import java.util.*;
+
+import model.AdminPojo;
+import model.CompanyPojo;
+import model.SeekersPojo;
+import view.MainClass;
 
 public class AdminPage {
 	private String admin_name="",admin_pass="";
@@ -116,7 +121,7 @@ public class AdminPage {
 			company();
 		}
 	}
-	public boolean addPermissionJobSeekers(Seekers seeker) {	
+	public boolean addPermissionJobSeekers(SeekersPojo seeker) {	
 		if(d.addPermissionJobSeekers(seeker)) {
 			System.out.println("\n ...JobSeeker Account Create Successfully...!");
 			return true;
@@ -125,7 +130,7 @@ public class AdminPage {
 			return false;
 		}
 	}
-	public int loginSeeker(Seekers j) {
+	public int loginSeeker(SeekersPojo j) {
 		int i = d.loginSeeker(j);
 		if(i!=0) {
 			return i;
@@ -175,7 +180,7 @@ public class AdminPage {
 		}
 		return a;
 	}
-	public boolean applyJob(Seekers j) {
+	public boolean applyJob(SeekersPojo j) {
 		if(d.applyJob(j)) {
 			return true;
 		}

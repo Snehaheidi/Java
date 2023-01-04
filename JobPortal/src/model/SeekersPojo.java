@@ -1,13 +1,13 @@
-package jobportal;
+package model;
 
-public class Seekers {
+public class SeekersPojo {
 	private String name,dob,collegeName,degree,companyName,role,mail,mailid;
 	private int exp,job_id,seekerId;
 	
-	public Seekers() {
+	public SeekersPojo() {
 		
 	}
-	public Seekers(String name,String mail,String dob, String collegeName, String degree, int exp, String companyName, String role) {
+	public SeekersPojo(String name,String mail,String dob, String collegeName, String degree, int exp, String companyName, String role) {
 		this.name = name;
 		this.mail = mail;
 		this.dob = dob;
@@ -18,16 +18,16 @@ public class Seekers {
 		this.companyName = companyName;
 		this.role = role;
 	}
-	public Seekers(String name, String mail) {
+	public SeekersPojo(String name, String mail) {
 		this.name = name;
 		this.mail = mail;
 	}
-	public Seekers(String mailid, int job_id, String mail) {
+	public SeekersPojo(String mailid, int job_id, String mail) {
 		this.mailid = mailid;
 		this.job_id = job_id;
 		this.mail = mail;
 	}
-	public Seekers(int seekerid, int job_id) {
+	public SeekersPojo(int seekerid, int job_id) {
 		this.seekerId = seekerid;
 		this.job_id = job_id;
 	}
