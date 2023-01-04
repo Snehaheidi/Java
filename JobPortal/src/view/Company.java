@@ -74,7 +74,7 @@ public class Company implements ProfileView{
 	}
 	private void selectProfile() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("1)ViewProfile  \t2)Post Job \t3)Feedback \t4)Applied Job \t5)LogOut");
+		System.out.println("1)ViewProfile  \t2)Post Job \t3)Feedback \t4)Applied Job \t5)SendMail \t6)LogOut");
 		int ch = scanner.nextInt();
 		switch(ch) {
 		case 1:
@@ -92,6 +92,9 @@ public class Company implements ProfileView{
 			appliedJobView();
 			selectProfile();
 		case 5:
+			sendResponse();
+			selectProfile();
+		case 6:
 			System.out.println("logout success");
 			companyJobPortal();
 		default:
@@ -118,7 +121,6 @@ public class Company implements ProfileView{
 			System.out.println("No One Applied thier job..");
 		}
 		list.clear();
-		//sendResponse();
 	}
 	private void sendResponse() {
 		Scanner scanner = new Scanner(System.in);

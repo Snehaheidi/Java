@@ -2,9 +2,9 @@ package model;
 
 public class AdminPojo {
 	private String com_name,mail_id,role,date,skils,experience,no_of_vacancy,place;
-	private int com_id,job_id;
+	private int com_id,job_id,seeker_id;
 	private String seeker_name,dob,college_name,degree,exp;
-	private int seeker_id;
+	
 	public AdminPojo(int job_id,String com_name,String mail,String role, String date, String skils, String experience,String no_of_vacancy) {
 		this.job_id = job_id;
 		this.com_name = com_name;

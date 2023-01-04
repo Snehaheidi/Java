@@ -1,13 +1,12 @@
 package view;
 
 import java.util.Scanner;
-
 import controller.AdminPage;
 //main class
 public class MainClass {
 	public static void main(String[] args) {
 		System.out.println("-----------------------");
-		System.out.println("       JobPortal       ");
+		System.out.println("+      JobPortal      +");
 		System.out.println("-----------------------");
 		MainClass m = new MainClass();
 		m.start();
