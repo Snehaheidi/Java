@@ -86,36 +86,6 @@ public class AdminPage {
 			seekers();
 		}
 	}
-	public boolean addPermissionJobSeekers(Seekers seeker) {	
-		if(d.addPermissionJobSeekers(seeker)) {
-			System.out.println("\n ...JobSeeker Account Create Successfully...!");
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-	public boolean loginSeeker(Seekers j) {
-		if(d.loginSeeker(j)) {
-			System.out.println("Login Seeker Successfully..");
-			return true;
-		}
-		return false;
-	}
-	public AdminPojo viewJobSeekerProfile(String mail) {
-		AdminPojo a = d.viewProfileJobSeeker(mail);
-		if(a!=null) {
-			return a;
-		}
-		return a;
-	}
-	public ArrayList<AdminPojo> realtedJob(String mail) {
-		ArrayList<AdminPojo> a = d.realtedJob(mail);
-		if(!a.isEmpty()) {
-			return a;
-		}
-		return a;
-	}
 	private void company() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("1)View All CompanyJobPortal \t 2)Back");
@@ -146,6 +116,37 @@ public class AdminPage {
 			company();
 		}
 	}
+	public boolean addPermissionJobSeekers(Seekers seeker) {	
+		if(d.addPermissionJobSeekers(seeker)) {
+			System.out.println("\n ...JobSeeker Account Create Successfully...!");
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	public int loginSeeker(Seekers j) {
+		int i = d.loginSeeker(j);
+		if(i!=0) {
+			return i;
+		}
+		return 0;
+	}
+	public AdminPojo viewJobSeekerProfile(String mail) {
+		AdminPojo a = d.viewProfileJobSeeker(mail);
+		if(a!=null) {
+			return a;
+		}
+		return a;
+	}
+	public ArrayList<AdminPojo> realtedJob(String mail) {
+		ArrayList<AdminPojo> a = d.realtedJob(mail);
+		if(!a.isEmpty()) {
+			return a;
+		}
+		return a;
+	}
+
 	public boolean addPermissionCompany(CompanyPojo c) {
 		if(d.addPermissionCompany(c)) {
 			System.out.println("\n ....Company Account Create Successfully...!");

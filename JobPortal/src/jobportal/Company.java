@@ -16,13 +16,7 @@ public class Company implements ProfileView{
 			mail_id = scanner.nextLine();
 			System.out.println("Enter the Password : ");
 			pass = scanner.nextLine();
-			CompanyPojo c = new CompanyPojo(mail_id,pass);
-			if(a.companyLogin(c)) {
-				login(mail_id,pass);
-			}else {
-				System.out.println("enter the correct password & mailid");
-				companyJobPortal();
-			}
+			login(mail_id,pass);
 			companyJobPortal();
 			break;
 		case 2:
@@ -65,30 +59,40 @@ public class Company implements ProfileView{
 	}
 	@Override
 	public void login(String mail_id,String pass) {
+		CompanyPojo c = new CompanyPojo(mail_id,pass);
+		if(a.companyLogin(c)) {
+			selectProfile();
+		}
+		else{
+		System.out.println("Enter the correct details..");
+		companyJobPortal();
+		}
+	}
+	private void selectProfile() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("1)ViewProfile  \t2)Post Job \t3)Feedback \t4)Applied Job \t5)LogOut");
 		int ch = scanner.nextInt();
 		switch(ch) {
 		case 1:
 			viewProfile(mail_id);
-			login(mail_id,pass);
+			selectProfile();
 			break;
 		case 2:
 			addJobPost();
-			login(mail_id,pass);
+			selectProfile();
 		case 3:
 			feedback();
-			login(mail_id,pass);
+			selectProfile();
 			break;
 		case 4:
 			appliedJobView();
-			login(mail_id,pass);
+			selectProfile();
 		case 5:
 			System.out.println("logout success");
 			companyJobPortal();
 		default:
 			System.out.println("Enter Correct Option..");
-			login(mail_id,pass);
+			selectProfile();
 		}
 	}
 	private void appliedJobView() {
@@ -115,6 +119,14 @@ public class Company implements ProfileView{
 			System.out.println("No One Applied thier job..");
 		}
 		list.clear();
+		sendResponse();
+	}
+	private void sendResponse() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter the Mail-Id : ");
+		mail_id = scanner.nextLine();
+		System.out.println("Send Msg or Exam Data (yy-mm-dd)");
+		String msg = scanner.nextLine();
 	}
 	@Override
 	public void register() {
@@ -146,13 +158,14 @@ public class Company implements ProfileView{
 		}
 	}
 	@Override
-	public void viewProfile(String mail_id) {		
+	public void viewProfile(String mail_id) {
+		//System.out.println("mail id :"+mail_id);
 		AdminPojo a1 = a.viewCompanyProfile(mail_id);
 		if(a1!=null) {
-	      System.out.println("Company Id : "+a1.getCom_id());
-	      System.out.println("Company Name : "+a1.getCollege_name());
-	      System.out.println("Mail-id : "+a1.getMail_id());
-	      System.out.println("Place : "+a1.getPlace());
+			System.out.println("Company Id : "+a1.getCom_id());
+			System.out.println("Company Name : "+a1.getCollege_name());
+			System.out.println("Mail-id : "+a1.getMail_id());
+			System.out.println("Place : "+a1.getPlace());
 		}
 		else {
 			System.out.println("No record found..");

@@ -23,7 +23,7 @@ public class DbConnection {
 			DB_URL += "JobPortal";
 			con = DriverManager.getConnection(DB_URL,USER,PASS);
 			st = con.createStatement();
-			String sql = "CREATE TABLE IF NOT EXISTS APPLY_JOBLISTS(Apply_Id INTEGER(10) AUTO_INCREMENT NOT NULL,Company_Mail VARCHAR(60)NOT NULL,Job_id INTEGER(20)NOT NULL,Job_seeker_id INTEGER(20)NOT NULL,PRIMARY KEY(Apply_Id),FOREIGN KEY(Company_Mail) REFERENCES Job_Post(MAIL_ID),FOREIGN KEY(Job_id) REFERENCES Job_post(Job_Id),FOREIGN KEY(Job_Seeker_id) REFERENCES JobSeekers(JobSeeker_Id))";
+			String sql = "CREATE TABLE IF NOT EXISTS APPLY_JOBS(Apply_Id INTEGER(10) AUTO_INCREMENT NOT NULL,Job_id INTEGER(20)NOT NULL,Job_seeker_id INTEGER(20)NOT NULL,PRIMARY KEY(Apply_Id),FOREIGN KEY(Job_id) REFERENCES Job_post(Job_Id),FOREIGN KEY(Job_Seeker_id) REFERENCES JobSeekers(JobSeeker_Id))";
 			st.executeUpdate(sql);
 			System.out.println("table create successfully..");
 		}

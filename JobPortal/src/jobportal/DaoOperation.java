@@ -15,11 +15,12 @@ public class DaoOperation {
 	private PreparedStatement preparestatement = null;
 	private Statement statement = null;
 	private ResultSet resultSet= null;
-    private ArrayList<AdminPojo> seeker = new ArrayList<AdminPojo>();
-    private ArrayList<AdminPojo> company =new ArrayList<AdminPojo>(); 
-    private ArrayList<AdminPojo> relatedJob = new ArrayList<AdminPojo>();
-    private ArrayList<AdminPojo> applylist = new ArrayList<AdminPojo>();
-	public boolean loginSeeker(Seekers j){
+	private ArrayList<AdminPojo> seeker = new ArrayList<AdminPojo>();
+	private ArrayList<AdminPojo> company =new ArrayList<AdminPojo>(); 
+	private ArrayList<AdminPojo> relatedJob = new ArrayList<AdminPojo>();
+	private ArrayList<AdminPojo> applylist = new ArrayList<AdminPojo>();
+	public int loginSeeker(Seekers j){
+		int id = 0;
 		try {
 			connection = DriverManager.getConnection(DB_URL,USER,PASS);
 			String sql = "SELECT * FROM JOBSEEKERS WHERE MAIL_ID = ?";
@@ -29,15 +30,16 @@ public class DaoOperation {
 			if(resultSet.next()) {
 				String mail = resultSet.getString("MAIL_ID");
 				if(mail.equals(j.getMail())) {
-					return true;
+					id = resultSet.getInt("JobSeeker_Id");
+					return id;
 				}
 			}
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
-			return false;
+			return id;
 		}
-		return false;
+		return id;
 	}
 	public boolean addPermissionJobSeekers(Seekers seeker) {
 		try {
@@ -375,7 +377,7 @@ public class DaoOperation {
 		AdminPojo a = null;
 		try {
 			connection = DriverManager.getConnection(DB_URL,USER,PASS);
-			String sql = "SELECT * FROM JOBSEEKERS WHERE MAIL_ID = ?";
+			String sql = "SELECT * FROM COMPANYS_DETAILS WHERE MAIL_ID = ?";
 			preparestatement = connection.prepareStatement(sql);
 			preparestatement.setString(1, mail_id);
 			resultSet = preparestatement.executeQuery();
@@ -406,112 +408,69 @@ public class DaoOperation {
 		return a;
 	}
 	public boolean applyJob(Seekers j) {
-		int seeker_id=0,job_id=0;
 		try {
 			connection = DriverManager.getConnection(DB_URL,USER,PASS);
-	     	String sql = "SELECT * FROM JOBSEEKERS WHERE MAIL_ID = ?";
-			preparestatement = connection.prepareStatement(sql);
-			preparestatement.setString(1, j.getMail());
-			resultSet = preparestatement.executeQuery();
-			if(resultSet.next()) {
-				seeker_id = resultSet.getInt("JobSeeker_Id");
-			}
-			try {
-				connection = DriverManager.getConnection(DB_URL,USER,PASS);
-		     	String s = "SELECT * FROM JOB_POST WHERE Job_Id = ?";
-				preparestatement = connection.prepareStatement(s);
-				preparestatement.setInt(1, j.getJob_id());
-				resultSet = preparestatement.executeQuery();
-				if(resultSet.next()) {
-					job_id = resultSet.getInt("Job_id");
-				}
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-				return false;
-			}
-			try {
-				String sql1 = "INSERT INTO APPLY_JOBLISTS(Company_Mail,Job_id,Job_seeker_id) VALUES (?,?,?)";
-				preparestatement = connection.prepareStatement(sql1);
-				preparestatement.setString(1,j.getMailid());
-				preparestatement.setInt(2,job_id);
-				preparestatement.setInt(3,seeker_id);
-				if(preparestatement.executeUpdate()==1) {
-					return true;
-				}
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-				return false;
+			String sql1 = "INSERT INTO APPLY_JOBS(Job_id,Job_seeker_id) VALUES (?,?)";
+			preparestatement = connection.prepareStatement(sql1);
+			preparestatement.setInt(1,j.getJob_id());
+			preparestatement.setInt(2,j.getSeekerId());
+			if(preparestatement.executeUpdate()==1) {
+				return true;
 			}
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
-		return false;
-	}
-	public ArrayList<AdminPojo> viewAppliedList(CompanyPojo c) {
-		String name=null,mail_id=null,degree=null,exp=null,role=null,skils=null;
-		AdminPojo a = null;
-		try {
-			connection = DriverManager.getConnection(DB_URL,USER,PASS);
-			String sql = "SELECT * FROM APPLY_JOBLISTS WHERE Company_Mail = ?";
-			preparestatement = connection.prepareStatement(sql);
-			preparestatement.setString(1, c.getMail_id());
-			resultSet = preparestatement.executeQuery();
-			while(resultSet.next()) {
-				int seeker_id = resultSet.getInt("Job_seeker_id");
-				int job_id = resultSet.getInt("Job_id");
-				try {
-					String sql1 = "SELECT * FROM JOB_SEEKERS WHERE JOBSEEKER_ID = ?";
-					preparestatement = connection.prepareStatement(sql1);
-					preparestatement.setInt(1, seeker_id);
-					resultSet = preparestatement.executeQuery();
-					if(resultSet.next()) {
-						name = resultSet.getString("NAME");
-						mail_id = resultSet.getString("MAIL_ID");
-						degree = resultSet.getString("DEGREE");
-						exp = resultSet.getString("EXPERIENCE");
-					}
-				}
-				catch(SQLException e) {
-					e.printStackTrace();
-					return null;
-				}
-				try {
-					String s = "SELECT * FROM JOB_POST WHERE JOB_ID = ?";
-					preparestatement = connection.prepareStatement(s);
-					preparestatement.setInt(1, job_id);
-					resultSet = preparestatement.executeQuery();
-					if(resultSet.next()) {
-					   role = resultSet.getString("JOB_ROLE");
-					   skils = resultSet.getString("SKILS");
-					}
-				}
-				catch(SQLException e) {
-					e.printStackTrace();
-					return null;
-				}
-				a = new AdminPojo(name,mail_id,degree,exp,role,skils); 
-				applylist.add(a);
-			}
-			return applylist;
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-		finally {
+	return false;
+}
+public ArrayList<AdminPojo> viewAppliedList(CompanyPojo c) {
+	String name=null,mail_id=null,degree=null,exp=null,role=null,skils=null;
+	AdminPojo a = null;
+	try {
+		connection = DriverManager.getConnection(DB_URL,USER,PASS);
+		String sql = "SELECT * FROM JOB_POST WHERE Company_Mail = ?";
+		preparestatement = connection.prepareStatement(sql);
+		preparestatement.setString(1, c.getMail_id());
+		resultSet = preparestatement.executeQuery();
+		if(resultSet.next()) {
+			int job_id = resultSet.getInt("Job_id");
+			//System.out.println("seekerid : "+seeker_id);
 			try {
-				connection.close();
-				connection = null;
-				preparestatement.close();
-				preparestatement = null;
-			} 
-			catch (SQLException e) {
+				String sql1 = "SELECT * FROM APPLY_JOBS WHERE Job_Id = ?";
+				preparestatement = connection.prepareStatement(sql1);
+				preparestatement.setInt(1, job_id);
+				resultSet = preparestatement.executeQuery();
+				while(resultSet.next()) {
+					name = resultSet.getString("NAME");
+					mail_id = resultSet.getString("MAIL_ID");
+					degree = resultSet.getString("DEGREE");
+					exp = resultSet.getString("EXPERIENCE");
+				}
+			}
+			catch(SQLException e) {
 				e.printStackTrace();
-			}	
+				return null;
+			}
+			a = new AdminPojo(name,mail_id,degree,exp,role,skils); 
+			applylist.add(a);
 		}
+		return applylist;
 	}
+	catch(SQLException e) {
+		e.printStackTrace();
+		return null;
+	}
+	finally {
+		try {
+			connection.close();
+			connection = null;
+			preparestatement.close();
+			preparestatement = null;
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
+}
 }

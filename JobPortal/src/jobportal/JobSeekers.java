@@ -17,15 +17,7 @@ public class JobSeekers implements ProfileView{
 			name = scanner.nextLine();
 			System.out.println("Enter the Mail-Id : ");
 			mail = scanner.nextLine();
-			Seekers j = new Seekers(name,mail);
-			if(a.loginSeeker(j)) {
-				System.out.println("Login Success...");
-				login(name,mail);
-			}	
-			else {
-				System.out.println("login again...");
-				jobSeekers();
-			}
+			login(name,mail);
 			break;
 		case 2:
 			register();
@@ -69,11 +61,7 @@ public class JobSeekers implements ProfileView{
 			name = scanner.nextLine();
 			System.out.println("Enter the Mail-Id : ");
 			mail = scanner.nextLine();
-			Seekers j = new Seekers(name,mail);
-			if(a.loginSeeker(j)) {
-				System.out.println("Login Success...");
-				login(name,mail);
-			}			
+			login(name,mail);
 		}
 		else{
 			System.out.println("Enter correct details..");
@@ -82,72 +70,90 @@ public class JobSeekers implements ProfileView{
 	}
 	@Override
 	public void login(String name,String mail) {
+		Seekers j = new Seekers(name,mail);
+		int i = a.loginSeeker(j);
+		if(i!=0) {
+			System.out.println("Login Success...");
+            System.out.println("Your Job-Seeker Id : "+i);
+			selectProfile();
+		}else{
+			System.out.println("Enter the Correct Details..");
+			jobSeekers();
+		}
+	}
+	private void selectProfile() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println(" 1)Search Job \t 2)ViewProfile \t3)FeedBack \t4)Logout");
+		System.out.println(" 1)Search Job \t 2)ViewProfile \t#)Response Here\t4)FeedBack \t5)Logout");
 		int ch = scanner.nextInt();
 		switch(ch) {
 		case 1:
 			relatedJob(mail);
 		case 2:
 			viewProfile(mail);
-			login(name,mail);
+			selectProfile();
 			break;
 		case 3:
-			feedback();
-			login(name,mail);
+			reponseHere();
+			selectProfile();
 			break;
 		case 4:
+			feedback();
+			selectProfile();
+			break;
+		case 5:
 			MainClass m = new MainClass();
 			m.start();
 			break;
 		default :
 			System.out.println("Enter the Correct Option...");
-			login(name,mail);
+			selectProfile();
 		}
+	}
+	private void reponseHere() {
+		// TODO Auto-generated method stub
+		
 	}
 	private void relatedJob(String mail) {
 		Scanner scanner = new Scanner(System.in);
 		ArrayList<AdminPojo> a1 = a.realtedJob(mail);
-       if(!a1.isEmpty()) {
-    	   for(AdminPojo admin:a1) {
-    		   System.out.println("--------Related Job----------");
-    		   System.out.println("Job-Id : "+admin.getJob_id());
-        	   System.out.println("Company Name : "+admin.getCom_name());
-        	   System.out.println("Contact Mail id : "+admin.getMail_id());
-        	   System.out.println("Role : "+admin.getRole());
-        	   System.out.println("Skils : "+admin.getSkils());
-        	   System.out.println("Experience : "+admin.getExperience());
-        	   System.out.println("No Of Vacancy : "+admin.getNo_of_vacancy());
-        	   System.out.println("Posted Date : "+admin.getDate());
-    	   }	   
-       }
-       a1.clear();
-       applyJob();
+		if(!a1.isEmpty()) {
+			for(AdminPojo admin:a1) {
+				System.out.println("--------Related Job----------");
+				System.out.println("Job-Id : "+admin.getJob_id());
+				System.out.println("Company Name : "+admin.getCom_name());
+				System.out.println("Contact Mail id : "+admin.getMail_id());
+				System.out.println("Role : "+admin.getRole());
+				System.out.println("Skils : "+admin.getSkils());
+				System.out.println("Experience : "+admin.getExperience());
+				System.out.println("No Of Vacancy : "+admin.getNo_of_vacancy());
+				System.out.println("Posted Date : "+admin.getDate());
+			}	   
+		}
+		a1.clear();
+		applyJob();
 	}
 	private void applyJob() {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("1)Apply Job \t 2)Back");
-	       int ch = scanner.nextInt();
-	       switch(ch) {
-	       case 1:
-	    	   apply();
-	    	   applyJob();
-	       case 2:
-	    	   login(name,mail);
-	       default:
-	    	   System.out.println("Enter Correct Option..");
-	    	   applyJob();
-	       }       
+		int ch = scanner.nextInt();
+		switch(ch) {
+		case 1:
+			apply();
+			applyJob();
+		case 2:
+			selectProfile();
+		default:
+			System.out.println("Enter Correct Option..");
+			applyJob();
+		}       
 	}
 	private void apply() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Enter the Company Mail-Id :");
-		String mailid = scanner.nextLine();
-		System.out.println("Enter the mail-id");
-		String mail = scanner.nextLine();
+		System.out.println("Seeker-Id :");
+		int seeker_id= scanner.nextInt();
 		System.out.println("Enter the Job-Id : ");
 		int job_id = scanner.nextInt();
-		Seekers j = new Seekers(mailid,job_id,mail);
+		Seekers j = new Seekers(seeker_id,job_id);
 		if(a.applyJob(j)) {
 			System.out.println("Apply Job..");
 		}
@@ -159,13 +165,13 @@ public class JobSeekers implements ProfileView{
 	public void viewProfile(String mail) {
 		AdminPojo a1 = a.viewJobSeekerProfile(mail);
 		if(a1!=null) {
-	       System.out.println("Name : "+a1.getSeeker_name());
-	       System.out.println("Date OF Birth : "+a1.getDob());
-	       System.out.println("College Name : "+a1.getCollege_name());
-	       System.out.println("Degree : "+a1.getDegree());
-	       System.out.println("Experience : "+a1.getExp());
-	       System.out.println("Company Name : "+a1.getCom_name());
-	       System.out.println("Role : "+a1.getRole());
+			System.out.println("Name : "+a1.getSeeker_name());
+			System.out.println("Date OF Birth : "+a1.getDob());
+			System.out.println("College Name : "+a1.getCollege_name());
+			System.out.println("Degree : "+a1.getDegree());
+			System.out.println("Experience : "+a1.getExp());
+			System.out.println("Company Name : "+a1.getCom_name());
+			System.out.println("Role : "+a1.getRole());
 		}
 		else {
 			System.out.println("No record found..");

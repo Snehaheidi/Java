@@ -5,7 +5,9 @@ import java.util.Scanner;
 //main class
 public class MainClass {
 	public static void main(String[] args) {
-		System.out.println("-------JobPortal-------");
+		System.out.println("-----------------------");
+		System.out.println("       JobPortal       ");
+		System.out.println("-----------------------");
 		MainClass m = new MainClass();
 		m.start();
 	}

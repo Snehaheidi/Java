@@ -2,7 +2,7 @@ package jobportal;
 
 public class Seekers {
 	private String name,dob,collegeName,degree,companyName,role,mail,mailid;
-	private int exp,job_id;
+	private int exp,job_id,seekerId;
 	
 	public Seekers() {
 		
@@ -26,6 +26,10 @@ public class Seekers {
 		this.mailid = mailid;
 		this.job_id = job_id;
 		this.mail = mail;
+	}
+	public Seekers(int seekerid, int job_id) {
+		this.seekerId = seekerid;
+		this.job_id = job_id;
 	}
 	public String getName() {
 		return name;
@@ -56,5 +60,8 @@ public class Seekers {
 	}
 	public int getJob_id() {
 		return job_id;
+	}
+	public int getSeekerId() {
+		return seekerId;
 	}
 }
